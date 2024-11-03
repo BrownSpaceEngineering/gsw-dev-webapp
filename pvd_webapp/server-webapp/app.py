@@ -8,6 +8,8 @@ from flask_cors import CORS, cross_origin
 
 URL = 'https://network.satnogs.org/api/observations/?id=&status=&ground_station=&start=&end=&satellite__norad_cat_id=&transmitter_uuid=ZJxCeQmih9zDfYNVrB4wRN&transmitter_mode=&transmitter_type=&waterfall_status=&vetted_status=&vetted_user=&observer=&start__lt=&observation_id='
 
+result = requests.get(URL)
+data = result.json()
 #print('%s %s' % (iss.sublong, iss.sublat))
 #print(iss.sublat / ephem.degree)
 #print(iss.sublong / ephem.degree)
@@ -21,8 +23,6 @@ def hello_world():
 
 @app.route("/telemetry")
 def get_telemetry():
-    result = requests.get(URL)
-    data = result.json()
     line1 = data[0]['tle0']
     line2 = data[0]['tle1']
     line3 = data[0]['tle2']
@@ -38,4 +38,4 @@ def get_telemetry():
         "end": time
     }
 
-
+)
