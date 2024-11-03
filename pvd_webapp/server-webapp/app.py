@@ -2,6 +2,7 @@ import requests
 import json
 import ephem
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 # from ephem import degree
 
@@ -12,6 +13,7 @@ URL = 'https://network.satnogs.org/api/observations/?id=&status=&ground_station=
 #print(iss.sublong / ephem.degree)
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 @app.route("/")
 def hello_world():
@@ -35,3 +37,5 @@ def get_telemetry():
         "longitude": iss.sublong / ephem.degree,
         "end": time
     }
+
+
